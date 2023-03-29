@@ -85,7 +85,7 @@
             android:text="Wyloguj"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/button1" />
+            android:id="@+id/logout_button" />
     </LinearLayout>
 
 

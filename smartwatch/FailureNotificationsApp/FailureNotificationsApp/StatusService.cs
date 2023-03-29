@@ -10,13 +10,27 @@ using Android.Media;
 namespace FailureNotificationsApp
 {
     [Activity(Label = "@string/app_name")]
-    public class StatusActivity : WearableActivity
+    public class StatusService : WearableActivity
     {
+
+        Button logout_button;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.StatusView);
             SetAmbientEnabled();
+
+            logout_button = FindViewById<Button>(Resource.Id.logout_button);
+            logout_button.Click += LogoutSubmit;
+        }
+        private void LogoutSubmit(object sender, EventArgs e)
+        {
+            MainActivity.isLoggedIn = false;
+            MainActivity.authToken = null;
+
+            Toast.MakeText(Application.Context, "Pomyślnie wylogowano", ToastLength.Short).Show();
+            Intent logoutIntent = new Intent(this, typeof(MainActivity));
+            StartActivity(logoutIntent);
         }
 
     }

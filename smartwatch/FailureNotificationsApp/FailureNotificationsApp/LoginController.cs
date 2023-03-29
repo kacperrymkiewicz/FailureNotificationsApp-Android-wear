@@ -33,9 +33,13 @@ namespace FailureNotificationsApp
 
         private void LoginSubmit(object sender, EventArgs e)
         {
-            Console.WriteLine("nacisnieto " + login.Text.ToString());
-            Intent statusService = new Intent(this, typeof(StatusActivity));
-            StartActivity(statusService);
+            if(login.Text.ToString() == "koc")
+            {
+                Toast.MakeText(Application.Context, "Pomyślnie zalogowano", ToastLength.Short).Show();
+                Intent statusService = new Intent(this, typeof(StatusService));
+                StartActivity(statusService);
+            }
+            Toast.MakeText(Application.Context, "Nieprawidłowy login lub hasło", ToastLength.Short).Show();
         }
     }
 }
