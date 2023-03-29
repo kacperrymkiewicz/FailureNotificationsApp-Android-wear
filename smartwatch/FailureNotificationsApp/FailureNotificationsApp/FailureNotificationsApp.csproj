@@ -53,6 +53,7 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginController.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,9 @@
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0.6" />
     <PackageReference Include="Xamarin.AndroidX.Wear" Version="1.1.0" />
     <PackageReference Include="Xamarin.Android.Wear" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\LoginView.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
