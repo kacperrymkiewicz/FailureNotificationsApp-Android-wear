@@ -8,4 +8,6 @@
     <string name="login_string">Logowanie</string>
     <string name="login_button_string">Zaloguj</string>
     <string name="password_label">Hasło</string>
+	<string name="channel_name">Local Notifications</string>
+	<string name="channel_description">The count from MainActivity.</string>
 </resources>

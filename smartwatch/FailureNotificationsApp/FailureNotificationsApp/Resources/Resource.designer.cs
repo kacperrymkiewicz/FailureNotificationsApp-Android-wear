@@ -5464,61 +5464,67 @@ namespace FailureNotificationsApp
 			public const int buttons_round_top_right_upper = 2131755066;
 			
 			// aapt resource value: 0x7F10003B
-			public const int complicationDrawable_noDataText = 2131755067;
+			public const int channel_description = 2131755067;
 			
 			// aapt resource value: 0x7F10003C
-			public const int complicationDrawable_textTypeface = 2131755068;
+			public const int channel_name = 2131755068;
 			
 			// aapt resource value: 0x7F10003D
-			public const int complicationDrawable_titleTypeface = 2131755069;
+			public const int complicationDrawable_noDataText = 2131755069;
 			
 			// aapt resource value: 0x7F10003E
-			public const int dismiss_overlay_button_label = 2131755070;
+			public const int complicationDrawable_textTypeface = 2131755070;
 			
 			// aapt resource value: 0x7F10003F
-			public const int generic_cancel = 2131755071;
+			public const int complicationDrawable_titleTypeface = 2131755071;
 			
 			// aapt resource value: 0x7F100040
-			public const int generic_yes = 2131755072;
+			public const int dismiss_overlay_button_label = 2131755072;
 			
 			// aapt resource value: 0x7F100041
-			public const int hello_world = 2131755073;
+			public const int generic_cancel = 2131755073;
 			
 			// aapt resource value: 0x7F100042
-			public const int login_button_string = 2131755074;
+			public const int generic_yes = 2131755074;
 			
 			// aapt resource value: 0x7F100043
-			public const int login_label = 2131755075;
+			public const int hello_world = 2131755075;
 			
 			// aapt resource value: 0x7F100044
-			public const int login_string = 2131755076;
+			public const int login_button_string = 2131755076;
 			
 			// aapt resource value: 0x7F100045
-			public const int navigation_drawer_content_description = 2131755077;
+			public const int login_label = 2131755077;
 			
 			// aapt resource value: 0x7F100046
-			public const int password_label = 2131755078;
+			public const int login_string = 2131755078;
 			
 			// aapt resource value: 0x7F100047
-			public const int search_menu_title = 2131755079;
+			public const int navigation_drawer_content_description = 2131755079;
 			
 			// aapt resource value: 0x7F100048
-			public const int status_bar_notification_info_overflow = 2131755080;
+			public const int password_label = 2131755080;
 			
 			// aapt resource value: 0x7F100049
-			public const int time_difference_now = 2131755081;
+			public const int search_menu_title = 2131755081;
 			
 			// aapt resource value: 0x7F10004A
-			public const int time_difference_short_days_and_hours = 2131755082;
+			public const int status_bar_notification_info_overflow = 2131755082;
 			
 			// aapt resource value: 0x7F10004B
-			public const int time_difference_short_hours_and_minutes = 2131755083;
+			public const int time_difference_now = 2131755083;
 			
 			// aapt resource value: 0x7F10004C
-			public const int ws_action_drawer_content_description = 2131755084;
+			public const int time_difference_short_days_and_hours = 2131755084;
 			
 			// aapt resource value: 0x7F10004D
-			public const int ws_navigation_drawer_content_description = 2131755085;
+			public const int time_difference_short_hours_and_minutes = 2131755085;
+			
+			// aapt resource value: 0x7F10004E
+			public const int ws_action_drawer_content_description = 2131755086;
+			
+			// aapt resource value: 0x7F10004F
+			public const int ws_navigation_drawer_content_description = 2131755087;
 			
 			static String()
 			{
