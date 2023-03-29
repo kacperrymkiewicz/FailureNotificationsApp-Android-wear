@@ -36,14 +36,14 @@ namespace FailureNotificationsApp
             login_button.Click += LoginSubmit;
         }
 
-        private async Task<string> GetAuthToken(string username, string password)
+        private async Task<string> GetAuthToken(string login, string pass)
         {
             using (var client = new HttpClient())
             {
                 var handler = new HttpClientHandler();
                 handler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
-                var credentials = new { username, password };
-                var content = new StringContent(@"{""username"" : ""test123"", ""password"" : ""test""}", Encoding.UTF8, "application/json");
+                //var credentials = new { username, password };
+                var content = new StringContent(JsonConvert.SerializeObject(new { username = login, password = pass }), Encoding.UTF8, "application/json");
                 var response = await client.PostAsync(apiUrl, content);
                 response.EnsureSuccessStatusCode();
                 var result = await response.Content.ReadAsStringAsync();
@@ -54,15 +54,18 @@ namespace FailureNotificationsApp
 
         private async void LoginSubmit(object sender, EventArgs e)
         {
-            if(login.Text.ToString() == "koc")
+            try
             {
-                string token = await GetAuthToken("test123", "test");
-                Console.WriteLine(token);
+                string token = await GetAuthToken(login.Text.ToString(), password.Text.ToString());
                 Toast.MakeText(Application.Context, "Pomyślnie zalogowano", ToastLength.Short).Show();
                 Intent statusService = new Intent(this, typeof(StatusService));
                 StartActivity(statusService);
+
             }
-            Toast.MakeText(Application.Context, "Nieprawidłowy login lub hasło", ToastLength.Short).Show();
+            catch(Exception ex) 
+            {
+                Toast.MakeText(Application.Context, "Nieprawidłowy login lub hasło", ToastLength.Short).Show();
+            }
         }
     }
 }
