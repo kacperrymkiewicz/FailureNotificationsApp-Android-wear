@@ -6,6 +6,8 @@ using Android.OS;
 using Android.Support.Wearable.Activity;
 using Android.Content;
 using Android.Media;
+using SocketIOClient;
+using System.Security.AccessControl;
 
 namespace FailureNotificationsApp
 {
@@ -14,7 +16,7 @@ namespace FailureNotificationsApp
     {
 
         Button logout_button;
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.StatusView);
@@ -23,6 +25,7 @@ namespace FailureNotificationsApp
             logout_button = FindViewById<Button>(Resource.Id.logout_button);
             logout_button.Click += LogoutSubmit;
         }
+
         private void LogoutSubmit(object sender, EventArgs e)
         {
             MainActivity.isLoggedIn = false;

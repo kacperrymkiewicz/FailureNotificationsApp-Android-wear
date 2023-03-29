@@ -28,7 +28,6 @@ namespace FailureNotificationsApp
 
             SetContentView(Resource.Layout.activity_main);
             SetAmbientEnabled();
-            //textView = FindViewById<TextView>(Resource.Id.text);
         }
 
         private bool checkAuthentication()

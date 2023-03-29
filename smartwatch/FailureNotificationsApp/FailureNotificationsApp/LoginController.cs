@@ -57,6 +57,8 @@ namespace FailureNotificationsApp
             try
             {
                 string token = await GetAuthToken(login.Text.ToString(), password.Text.ToString());
+                MainActivity.authToken = token;
+                MainActivity.isLoggedIn = true;
                 Toast.MakeText(Application.Context, "Pomyślnie zalogowano", ToastLength.Short).Show();
                 Intent statusService = new Intent(this, typeof(StatusService));
                 StartActivity(statusService);
