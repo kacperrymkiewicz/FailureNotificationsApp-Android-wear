@@ -92,6 +92,12 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="System.Net.Http">
+      <Version>4.3.4</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.PercentLayout" Version="1.0.0.6" />
     <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0.6" />
     <PackageReference Include="Xamarin.AndroidX.Wear" Version="1.1.0" />
