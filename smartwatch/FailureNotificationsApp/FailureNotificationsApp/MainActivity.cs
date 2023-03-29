@@ -5,6 +5,11 @@ using Android.Widget;
 using Android.OS;
 using Android.Support.Wearable.Activity;
 using Android.Content;
+using SocketIO.Client;
+using Android.Nfc;
+using Android.Util;
+using Newtonsoft.Json;
+using Org.Json;
 
 namespace FailureNotificationsApp
 {
@@ -14,9 +19,13 @@ namespace FailureNotificationsApp
         public static bool isLoggedIn;
         public static string authToken;
 
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
+            Intent backgroundService = new Intent(base.ApplicationContext, typeof(BackgroundTasks));
+            StartService(backgroundService);
 
             isLoggedIn = checkAuthentication();
 
@@ -28,6 +37,7 @@ namespace FailureNotificationsApp
 
             SetContentView(Resource.Layout.activity_main);
             SetAmbientEnabled();
+
         }
 
         private bool checkAuthentication()
