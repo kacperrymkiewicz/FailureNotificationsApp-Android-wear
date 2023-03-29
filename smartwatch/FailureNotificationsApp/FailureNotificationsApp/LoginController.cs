@@ -34,6 +34,8 @@ namespace FailureNotificationsApp
         private void LoginSubmit(object sender, EventArgs e)
         {
             Console.WriteLine("nacisnieto " + login.Text.ToString());
+            Intent statusService = new Intent(this, typeof(StatusActivity));
+            StartActivity(statusService);
         }
     }
 }
