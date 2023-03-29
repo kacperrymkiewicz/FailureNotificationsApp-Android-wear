@@ -6,6 +6,6 @@
     -->
     <string name="login_label">Login</string>
     <string name="login_string">Logowanie</string>
-    <string name="login_button">Zaloguj</string>
+    <string name="login_button_string">Zaloguj</string>
     <string name="password_label">Hasło</string>
 </resources>

@@ -4,21 +4,36 @@ using Android.App;
 using Android.Widget;
 using Android.OS;
 using Android.Support.Wearable.Activity;
+using Android.Content;
 
 namespace FailureNotificationsApp
 {
     [Activity(Label = "@string/app_name", MainLauncher = true)]
     public class MainActivity : WearableActivity
     {
-        TextView textView;
+        public static bool isLoggedIn;
+        public static string authToken;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            SetContentView(Resource.Layout.LoginView);
 
-            textView = FindViewById<TextView>(Resource.Id.text);
+            isLoggedIn = checkAuthentication();
+
+            if(!isLoggedIn)
+            {
+                Intent loginService = new Intent(this, typeof(LoginController));
+                StartActivity(loginService);
+            }
+
+            SetContentView(Resource.Layout.activity_main);
             SetAmbientEnabled();
+            //textView = FindViewById<TextView>(Resource.Id.text);
+        }
+
+        private bool checkAuthentication()
+        {
+            return false;
         }
     }
 }

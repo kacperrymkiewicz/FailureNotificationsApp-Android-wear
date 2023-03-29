@@ -19,7 +19,7 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="10dp">
         <TextView
-            android:text="Logowanie"
+            android:text="@string/login_string"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -29,18 +29,18 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText1"
+        android:id="@+id/login_input"
         android:inputType="text"
-        android:hint="Login" />
+        android:hint="@string/login_label" />
     <EditText
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:hint="Hasło" />
+        android:id="@+id/password_input"
+        android:hint="@string/password_label" />
     <Button
-        android:text="Zaloguj"
+        android:text="@string/login_button_string"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button1" />
+        android:id="@+id/login_button" />
 </LinearLayout>
