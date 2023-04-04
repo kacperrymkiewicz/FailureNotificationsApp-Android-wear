@@ -14,11 +14,11 @@ namespace FailureNotificationsApp
     [Activity(Label = "@string/app_name")]
     public class StatusService : WearableActivity
     {
-
         Button logout_button;
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+
             SetContentView(Resource.Layout.StatusView);
             SetAmbientEnabled();
 

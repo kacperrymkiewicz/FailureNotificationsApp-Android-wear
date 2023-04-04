@@ -51,6 +51,8 @@ namespace FailureNotificationsApp
                 var json = data[0] as JSONObject;
                 Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
                 //socket.Emit("add user", "Xamarin Android");
+                Intent statusService = new Intent(this, typeof(RaportActivity));
+                StartActivity(statusService);
             });
 
             socket.Connect();

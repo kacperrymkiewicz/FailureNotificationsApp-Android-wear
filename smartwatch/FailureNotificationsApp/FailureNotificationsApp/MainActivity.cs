@@ -39,14 +39,23 @@ namespace FailureNotificationsApp
                 Intent loginService = new Intent(this, typeof(LoginController));
                 StartActivity(loginService);
             }
+            else
+            {
+                Intent statusService = new Intent(this, typeof(StatusService));
+                StartActivity(statusService);
+            }
 
-            SetContentView(Resource.Layout.activity_main);
+            //SetContentView(Resource.Layout.activity_main);
             SetAmbientEnabled();
 
         }
 
         private bool checkAuthentication()
         {
+            if(isLoggedIn)
+            {
+                return true;
+            }
             return false;
         }
 
