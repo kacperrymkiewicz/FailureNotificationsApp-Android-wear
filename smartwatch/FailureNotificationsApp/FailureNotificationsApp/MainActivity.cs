@@ -14,7 +14,7 @@ using Android.Support.V4.App;
 
 namespace FailureNotificationsApp
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", MainLauncher = true, NoHistory = true)]
     public class MainActivity : WearableActivity
     {
         public static bool isLoggedIn;

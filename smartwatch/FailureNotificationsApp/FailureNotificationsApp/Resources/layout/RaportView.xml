@@ -53,7 +53,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/stanowisko_string"
+            android:id="@+id/priorytet_string"
             android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
@@ -61,10 +61,29 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="78.9dp"
+        android:layout_height="wrap_content"
         android:id="@+id/linearLayout5"
+        android:gravity="center">
+        <TextView
+            android:text="Opis: niski"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/opis_string"
+            android:textStyle="normal"
+            android:textSize="9dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="78.9dp"
+        android:id="@+id/linearLayout6"
         android:gravity="center"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="15dp">
         <Button
             android:text="Przyjmij zgłoszenie"
             android:layout_width="wrap_content"

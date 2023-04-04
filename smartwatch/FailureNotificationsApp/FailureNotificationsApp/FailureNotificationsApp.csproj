@@ -47,6 +47,7 @@
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -92,6 +93,7 @@
     <AndroidResource Include="Resources\values-round\strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="helpers\" />
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>

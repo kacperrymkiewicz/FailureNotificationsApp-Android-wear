@@ -9,6 +9,7 @@ using Android.Views;
 using Android.Widget;
 using FailureNotificationsApp;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Org.Json;
 using SocketIO.Client;
 using System;
@@ -40,19 +41,23 @@ namespace FailureNotificationsApp
         {
             socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app/");
             socket.On("newAwaria", (data) => {
+                var json = data[0] as JSONObject;
+                var obj = JsonConvert.DeserializeObject(json.ToString());
+                dynamic jsonobj = JObject.Parse(obj.ToString());
+                string description = "Stanowisko: " + jsonobj.newAwaria.stanowisko.nazwa + "\nOpis: " + jsonobj.newAwaria.opis_awarii;
+
+                Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
+
                 var notification = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
                 .SetContentTitle("Nowa awaria")
-                .SetContentText("test")
+                .SetContentText(description)
                 .SetSmallIcon(Resource.Drawable.notification_icon_background).Build();
 
                 var manager = NotificationManagerCompat.From(this);
                 manager.Notify(MainActivity.NOTIFICATION_ID, notification);
-
-                var json = data[0] as JSONObject;
-                Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
+                
                 //socket.Emit("add user", "Xamarin Android");
-                Intent statusService = new Intent(this, typeof(RaportActivity));
-                StartActivity(statusService);
+
             });
 
             socket.Connect();

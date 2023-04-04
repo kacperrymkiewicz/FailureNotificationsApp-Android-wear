@@ -12,7 +12,7 @@ using System.Text;
 
 namespace FailureNotificationsApp
 {
-    [Activity(Label = "@string/app_name")]
+    [Activity(Label = "@string/app_name", NoHistory = true)]
     public class LoginController : WearableActivity
     {
 
