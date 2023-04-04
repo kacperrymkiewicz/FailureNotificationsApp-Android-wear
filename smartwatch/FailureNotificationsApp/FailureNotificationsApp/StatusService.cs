@@ -13,6 +13,7 @@ using SocketIO.Client;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Org.Json;
+using FailureNotificationsApp.helpers;
 
 namespace FailureNotificationsApp
 {
@@ -79,7 +80,7 @@ namespace FailureNotificationsApp
 
             intent.PutExtra("notificationDescription", notificationDescription);
             intent.PutExtra("notificationWorkstation", notificationWorkstation);
-            intent.PutExtra("notificationPriority", notificationPriority.ToString());
+            intent.PutExtra("notificationPriority", new PriorityHelper(notificationPriority).getPriority());
             StartActivity(intent);
         }
 

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackgroundTasks.cs" />
+    <Compile Include="helpers\PriorityHelper.cs" />
     <Compile Include="LoginController.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="RaportActivity.cs" />
@@ -93,7 +94,6 @@
     <AndroidResource Include="Resources\values-round\strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="helpers\" />
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
