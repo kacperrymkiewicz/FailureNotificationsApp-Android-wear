@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
+using FailureNotificationsApp.helpers;
+using Newtonsoft.Json.Linq;
 
 namespace FailureNotificationsApp
 {
@@ -47,6 +49,10 @@ namespace FailureNotificationsApp
                 var response = await client.PostAsync(apiUrl, content);
                 response.EnsureSuccessStatusCode();
                 var result = await response.Content.ReadAsStringAsync();
+
+                var obj = JsonConvert.DeserializeObject(result);
+                dynamic jsonobj = JObject.Parse(obj.ToString());
+                MainActivity.authUsername = jsonobj.user.imie + " " + jsonobj.user.nazwisko;
                 return result;
             }
         }
@@ -62,7 +68,6 @@ namespace FailureNotificationsApp
                 Toast.MakeText(Application.Context, "Pomyślnie zalogowano", ToastLength.Short).Show();
                 Intent statusService = new Intent(this, typeof(StatusService));
                 StartActivity(statusService);
-
             }
             catch(Exception ex) 
             {

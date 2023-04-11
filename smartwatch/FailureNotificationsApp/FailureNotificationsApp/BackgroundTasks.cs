@@ -8,6 +8,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using FailureNotificationsApp;
+using FailureNotificationsApp.helpers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.Json;
@@ -41,23 +42,25 @@ namespace FailureNotificationsApp
         {
             socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app/");
             socket.On("newAwaria", (data) => {
-                var json = data[0] as JSONObject;
-                var obj = JsonConvert.DeserializeObject(json.ToString());
-                dynamic jsonobj = JObject.Parse(obj.ToString());
-                string description = "Stanowisko: " + jsonobj.newAwaria.stanowisko.nazwa + "\nOpis: " + jsonobj.newAwaria.opis_awarii;
+                if(MainActivity.isLoggedIn)
+                {
+                    var json = data[0] as JSONObject;
+                    var obj = JsonConvert.DeserializeObject(json.ToString());
+                    dynamic jsonobj = JObject.Parse(obj.ToString());
+                    string description = "Priorytet: " + new PriorityHelper((int)jsonobj.newAwaria.priorytet).getPriority();
 
-                Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
+                    Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
 
-                var notification = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
-                .SetContentTitle("Nowa awaria")
-                .SetContentText(description)
-                .SetSmallIcon(Resource.Drawable.notification_icon_background).Build();
+                    var notification = new NotificationCompat.Builder(this, MainActivity.CHANNEL_ID)
+                    .SetContentTitle("Nowa awaria")
+                    .SetContentText(description)
+                    .SetSmallIcon(Resource.Drawable.notification_icon_background).Build();
 
-                var manager = NotificationManagerCompat.From(this);
-                manager.Notify(MainActivity.NOTIFICATION_ID, notification);
-                
-                //socket.Emit("add user", "Xamarin Android");
+                    var manager = NotificationManagerCompat.From(this);
+                    manager.Notify(MainActivity.NOTIFICATION_ID, notification);
 
+                    //socket.Emit("add user", "Xamarin Android");
+                }
             });
 
             socket.Connect();

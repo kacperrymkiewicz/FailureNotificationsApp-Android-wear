@@ -11,6 +11,8 @@ using Android.Util;
 using Newtonsoft.Json;
 using Org.Json;
 using Android.Support.V4.App;
+using Android.Locations;
+using Android.Net;
 
 namespace FailureNotificationsApp
 {
@@ -19,6 +21,7 @@ namespace FailureNotificationsApp
     {
         public static bool isLoggedIn;
         public static string authToken;
+        public static string authUsername;
 
         public static readonly int NOTIFICATION_ID = 1000;
         public static readonly string CHANNEL_ID = "location_notification";

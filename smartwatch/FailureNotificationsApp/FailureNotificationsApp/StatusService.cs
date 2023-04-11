@@ -25,6 +25,7 @@ namespace FailureNotificationsApp
         public static string notificationWorkstation;
         public static int notificationPriority;
         Button logout_button;
+        TextView username;
         SocketIO.Client.Socket socket;
 
         protected override async void OnCreate(Bundle bundle)
@@ -34,7 +35,10 @@ namespace FailureNotificationsApp
             SetContentView(Resource.Layout.StatusView);
             SetAmbientEnabled();
 
-            if(unseenNotification)
+            username = FindViewById<TextView>(Resource.Id.pracownik_username);
+            username.Text = "Pracownik: " + MainActivity.authUsername;
+
+            if (unseenNotification)
             {
                 OpenRaportView();
                 Finish();

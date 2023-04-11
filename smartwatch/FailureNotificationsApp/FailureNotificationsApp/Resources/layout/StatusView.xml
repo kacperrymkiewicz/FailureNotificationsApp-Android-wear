@@ -48,11 +48,11 @@
         android:layout_alignParentRight="false"
         android:layout_alignParentBottom="false">
             <TextView
-            android:text="Pracownik ID: 4"
+            android:text="Pracownik: "
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:id="@+id/textView3" />
+            android:id="@+id/pracownik_username" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
