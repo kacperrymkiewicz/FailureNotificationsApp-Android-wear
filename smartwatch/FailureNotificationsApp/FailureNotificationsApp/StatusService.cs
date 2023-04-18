@@ -85,6 +85,7 @@ namespace FailureNotificationsApp
             intent.PutExtra("notificationDescription", notificationDescription);
             intent.PutExtra("notificationWorkstation", notificationWorkstation);
             intent.PutExtra("notificationPriority", new PriorityHelper(notificationPriority).getPriority());
+            intent.PutExtra("notificationPriorityNumber", notificationPriority);
             StartActivity(intent);
         }
 

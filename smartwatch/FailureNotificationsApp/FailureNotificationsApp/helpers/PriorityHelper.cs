@@ -1,5 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
@@ -26,6 +27,14 @@ namespace FailureNotificationsApp.helpers
             if (priority == 2) { return "średni"; }
             if (priority == 3) { return "wysoki"; }
             return "";
+        }
+
+        public Color getPriorityColor()
+        {
+            if (priority == 1) { return Color.Yellow; }
+            if (priority == 2) { return Color.Orange; }
+            if (priority == 3) { return Color.Red; }
+            return Color.Red;
         }
     }
 }

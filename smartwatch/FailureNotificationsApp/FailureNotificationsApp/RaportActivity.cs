@@ -8,6 +8,8 @@ using Android.Content;
 using Android.Media;
 using SocketIOClient;
 using System.Security.AccessControl;
+using Android.Graphics;
+using FailureNotificationsApp.helpers;
 
 namespace FailureNotificationsApp
 {
@@ -32,7 +34,8 @@ namespace FailureNotificationsApp
             workstation.Text = "Stanowisko: " + Intent.GetStringExtra("notificationWorkstation");
 
             priority = FindViewById<TextView>(Resource.Id.priorytet_string);
-            priority.Text = "Priorytet: " + Intent.GetStringExtra("notificationPriority");
+            priority.Text = Intent.GetStringExtra("notificationPriority");
+            priority.SetTextColor(new PriorityHelper(Intent.GetIntExtra("notificationPriorityNumber", 1)).getPriorityColor());
 
             StatusService.unseenNotification = false;
         }
