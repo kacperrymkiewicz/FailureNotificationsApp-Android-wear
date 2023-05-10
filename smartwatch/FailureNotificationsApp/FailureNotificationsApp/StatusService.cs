@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using FailureNotificationsApp.Interfaces;
 using Refit;
 using FailureNotificationsApp.models;
+using Android.Text;
 
 namespace FailureNotificationsApp
 {
@@ -34,8 +35,8 @@ namespace FailureNotificationsApp
         TextView username;
         SocketIO.Client.Socket socket;
 
-        string[] items;
-        ListView mainList;
+        ListView FailureListView;
+        List<Failure> failures;
 
         private const string apiUrl = "https://projektzespolowyitm-production.up.railway.app/api/awarie/pracownik/";
         IServiceAPI serviceAPI;
@@ -61,15 +62,16 @@ namespace FailureNotificationsApp
             httpClient.DefaultRequestHeaders.Add("x-access-token", MainActivity.authToken);
 
             serviceAPI = RestService.For<IServiceAPI>(httpClient);
-            List<Failure> failures = await serviceAPI.GetFailures(MainActivity.authUserID);
+            failures = await serviceAPI.GetFailures(MainActivity.authUserID);
             List<string> failures_list = new List<string>();
             foreach(var failure in failures)
             {
-                failures_list.Add(failure.opis_awarii);
+                failures_list.Add(failure.stanowisko.nazwa + ", priorytet: " + new PriorityHelper(failure.priorytet).getPriority());
             }
 
-            mainList = (ListView)FindViewById<ListView>(Resource.Id.listView1);
-            mainList.Adapter = new ArrayAdapter(this, Resource.Layout.CustomItemList, failures_list);
+            FailureListView = (ListView)FindViewById<ListView>(Resource.Id.listView1);
+            FailureListView.Adapter = new ArrayAdapter(this, Resource.Layout.CustomItemList, failures_list);
+            FailureListView.ItemClick += FailureListView_ItemClick;
 
             if (unseenNotification)
             {
@@ -98,6 +100,11 @@ namespace FailureNotificationsApp
 
             logout_button = FindViewById<Button>(Resource.Id.logout_button);
             logout_button.Click += LogoutSubmit;
+        }
+
+        private void FailureListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            Toast.MakeText(Application.Context, failures[e.Position].opis_awarii, ToastLength.Short).Show();
         }
 
         private void LogoutSubmit(object sender, EventArgs e)
