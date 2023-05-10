@@ -104,6 +104,13 @@ namespace FailureNotificationsApp
 
         private void FailureListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
+            var intent = new Intent(this, typeof(DetailsActvity));
+
+            intent.PutExtra("notificationDescription", failures[e.Position].opis_awarii);
+            intent.PutExtra("notificationWorkstation", failures[e.Position].stanowisko.nazwa);
+            intent.PutExtra("notificationPriority", new PriorityHelper(failures[e.Position].priorytet).getPriority());
+            intent.PutExtra("notificationPriorityNumber", failures[e.Position].priorytet);
+            StartActivity(intent);
             Toast.MakeText(Application.Context, failures[e.Position].opis_awarii, ToastLength.Short).Show();
         }
 

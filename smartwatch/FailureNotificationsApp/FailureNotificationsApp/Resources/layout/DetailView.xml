@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout1"
+    android:gravity="center_horizontal">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout2"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:text="Szczegóły awarii"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textView100" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:gravity="center">
+        <TextView
+            android:text="Stanowisko: 3"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/stanowisko_string_details"
+            android:textStyle="bold"
+            android:textSize="12dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout4"
+        android:gravity="center">
+        <TextView
+            android:text="Priorytet: "
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/priorytet_desc"
+            android:textStyle="bold"
+            android:textSize="12dp" />
+        <TextView
+            android:text="niski"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/priorytet_string_details"
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:textColor="#fffff800" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout5"
+        android:gravity="center">
+        <TextView
+            android:text="Opis: test"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/opis_string_details"
+            android:textStyle="normal"
+            android:textSize="9dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="40.9dp"
+        android:id="@+id/linearLayout6"
+        android:gravity="center"
+        android:layout_marginTop="15dp">
+        <Button
+            android:text="Powrót"
+            android:layout_width="wrap_content"
+            android:layout_height="70.3dp"
+            android:id="@+id/back_button"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="5dp"
+            android:textSize="12dp" />
+        <Button
+            android:text="Ukończ"
+            android:layout_width="wrap_content"
+            android:layout_height="70.3dp"
+            android:id="@+id/finish_button"
+            android:layout_marginRight="5dp" 
+            android:textSize="12dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
