@@ -40,7 +40,7 @@ namespace FailureNotificationsApp
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app/");
+            socket = IO.Socket("https://projektzespolowyitm-production-7d0d.up.railway.app");
             socket.On("newAwaria", (data) => {
                 if(MainActivity.isLoggedIn)
                 {
