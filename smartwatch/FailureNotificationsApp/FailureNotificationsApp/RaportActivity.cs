@@ -17,7 +17,7 @@ namespace FailureNotificationsApp
     public class RaportActivity : WearableActivity
     {
 
-        Button btn;
+        Button accept_button;
         TextView description;
         TextView workstation;
         TextView priority;
@@ -37,7 +37,15 @@ namespace FailureNotificationsApp
             priority.Text = Intent.GetStringExtra("notificationPriority");
             priority.SetTextColor(new PriorityHelper(Intent.GetIntExtra("notificationPriorityNumber", 1)).getPriorityColor());
 
+            accept_button = FindViewById<Button>(Resource.Id.accept_button);
+            accept_button.Click += Accept_button_Click;
+
             StatusService.unseenNotification = false;
+        }
+
+        private void Accept_button_Click(object sender, EventArgs e)
+        {
+            Finish();
         }
     }
 }

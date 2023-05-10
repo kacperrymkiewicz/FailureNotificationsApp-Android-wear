@@ -99,7 +99,7 @@
             android:text="Przyjmij zgłoszenie"
             android:layout_width="wrap_content"
             android:layout_height="70.3dp"
-            android:id="@+id/button"
+            android:id="@+id/accept_button"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp" />
     </LinearLayout>
