@@ -14,6 +14,12 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Org.Json;
 using FailureNotificationsApp.helpers;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using FailureNotificationsApp.Interfaces;
+using Refit;
+using FailureNotificationsApp.models;
 
 namespace FailureNotificationsApp
 {
@@ -28,6 +34,12 @@ namespace FailureNotificationsApp
         TextView username;
         SocketIO.Client.Socket socket;
 
+        string[] items;
+        ListView mainList;
+
+        private const string apiUrl = "https://projektzespolowyitm-production.up.railway.app/api/awarie/pracownik/";
+        IServiceAPI serviceAPI;
+
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -38,13 +50,34 @@ namespace FailureNotificationsApp
             username = FindViewById<TextView>(Resource.Id.pracownik_username);
             username.Text = "Pracownik: " + MainActivity.authUsername;
 
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, sslErrors) => true
+            };
+            var httpClient = new HttpClient(handler)
+            {
+            BaseAddress = new Uri("https://projektzespolowyitm-production-7d0d.up.railway.app/api")
+            };
+            httpClient.DefaultRequestHeaders.Add("x-access-token", MainActivity.authToken);
+
+            serviceAPI = RestService.For<IServiceAPI>(httpClient);
+            List<Failure> failures = await serviceAPI.GetFailures(MainActivity.authUserID);
+            List<string> failures_list = new List<string>();
+            foreach(var failure in failures)
+            {
+                failures_list.Add(failure.opis_awarii);
+            }
+
+            mainList = (ListView)FindViewById<ListView>(Resource.Id.listView1);
+            mainList.Adapter = new ArrayAdapter(this, Resource.Layout.CustomItemList, failures_list);
+
             if (unseenNotification)
             {
                 OpenRaportView();
                 Finish();
             }
 
-            socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app/");
+            socket = IO.Socket("https://projektzespolowyitm-production-7d0d.up.railway.app");
             socket.On("newAwaria", (data) => {
                 Console.WriteLine("poszlo");
                 if(MainActivity.isLoggedIn)
@@ -87,6 +120,35 @@ namespace FailureNotificationsApp
             intent.PutExtra("notificationPriority", new PriorityHelper(notificationPriority).getPriority());
             intent.PutExtra("notificationPriorityNumber", notificationPriority);
             StartActivity(intent);
+        }
+
+        private async Task<List<string>> GetFailureList(int employeeId)
+        {
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Add("x-access-token", MainActivity.authToken);
+                var handler = new HttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = (message, certificate, chain, sslPolicyErrors) => true;
+                var response = await client.GetAsync(apiUrl + employeeId);
+                response.EnsureSuccessStatusCode();
+                var result = await response.Content.ReadAsStringAsync();
+
+                //var obj = JsonConvert.DeserializeObject(result);
+                //dynamic json_response = JObject.Parse(obj.ToString());
+                //MainActivity.authUsername = jsonobj.user.imie + " " + jsonobj.user.nazwisko;
+
+                List<string> failures = new List<string>();
+                foreach (var failure in result)
+                {
+                    var obj = JsonConvert.DeserializeObject(result);
+                    dynamic json_response = JObject.Parse(obj.ToString());
+                    failures.Add(failure.ToString());
+                    Console.WriteLine(failure.ToString());
+                }
+                Console.WriteLine(result.ToString());
+
+                return failures;
+            }
         }
 
 
