@@ -53,7 +53,8 @@ namespace FailureNotificationsApp
                 var obj = JsonConvert.DeserializeObject(result);
                 dynamic jsonobj = JObject.Parse(obj.ToString());
                 MainActivity.authUsername = jsonobj.user.imie + " " + jsonobj.user.nazwisko;
-                return result;
+                MainActivity.authUserID = jsonobj.user.id;
+                return jsonobj.access_token;
             }
         }
 
