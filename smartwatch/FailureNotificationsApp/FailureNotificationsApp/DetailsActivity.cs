@@ -6,9 +6,13 @@ using Android.Support.Wearable.Activity;
 using Android.Views;
 using Android.Widget;
 using FailureNotificationsApp.helpers;
+using FailureNotificationsApp.Interfaces;
+using FailureNotificationsApp.models;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 
 namespace FailureNotificationsApp
@@ -22,6 +26,8 @@ namespace FailureNotificationsApp
         TextView description;
         TextView workstation;
         TextView priority;
+
+        IServiceAPI serviceAPI;
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -47,7 +53,23 @@ namespace FailureNotificationsApp
 
         private void Finish_button_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, sslErrors) => true
+            };
+            var httpClient = new HttpClient(handler)
+            {
+                BaseAddress = new Uri(MainActivity.baseApiUrl)
+            };
+            httpClient.DefaultRequestHeaders.Add("x-access-token", MainActivity.authToken);
+
+            serviceAPI = RestService.For<IServiceAPI>(httpClient);
+            serviceAPI.FinishFailure(Intent.GetIntExtra("failureId", 0));
+
+            var intent = new Intent(this, typeof(StatusService));
+            intent.PutExtra("failureFinishedId", Intent.GetIntExtra("failureId", 0));
+            StartActivity(intent);
+            Finish();
         }
 
         private void Back_button_Click(object sender, EventArgs e)

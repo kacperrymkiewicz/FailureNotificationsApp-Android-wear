@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Support.Wearable.Activity;
 using Android.Content;
 using Android.Media;
-using SocketIOClient;
 using System.Security.AccessControl;
 using static Android.Icu.Text.CaseMap;
 using SocketIO.Client;
@@ -48,8 +47,14 @@ namespace FailureNotificationsApp
             SetContentView(Resource.Layout.StatusView);
             SetAmbientEnabled();
 
+            Intent backgroundService = new Intent(base.ApplicationContext, typeof(BackgroundTasks));
+            StartService(backgroundService);
+
             username = FindViewById<TextView>(Resource.Id.pracownik_username);
             username.Text = "Pracownik: " + MainActivity.authUsername;
+
+            LinearLayout layout = FindViewById<LinearLayout>(Resource.Id.loading_layout);
+            layout.Visibility = Android.Views.ViewStates.Visible;
 
             var handler = new HttpClientHandler
             {
@@ -57,7 +62,7 @@ namespace FailureNotificationsApp
             };
             var httpClient = new HttpClient(handler)
             {
-            BaseAddress = new Uri("https://projektzespolowyitm-production-7d0d.up.railway.app/api")
+            BaseAddress = new Uri(MainActivity.baseApiUrl)
             };
             httpClient.DefaultRequestHeaders.Add("x-access-token", MainActivity.authToken);
 
@@ -66,12 +71,17 @@ namespace FailureNotificationsApp
             List<string> failures_list = new List<string>();
             foreach(var failure in failures)
             {
-                failures_list.Add(failure.stanowisko.nazwa + ", priorytet: " + new PriorityHelper(failure.priorytet).getPriority());
+                if(Intent.GetIntExtra("failureFinishedId", 0) != failure.id)
+                {
+                    failures_list.Add(failure.stanowisko.nazwa + ", priorytet: " + new PriorityHelper(failure.priorytet).getPriority());
+                }
             }
 
             FailureListView = (ListView)FindViewById<ListView>(Resource.Id.listView1);
             FailureListView.Adapter = new ArrayAdapter(this, Resource.Layout.CustomItemList, failures_list);
             FailureListView.ItemClick += FailureListView_ItemClick;
+
+            layout.Visibility = Android.Views.ViewStates.Gone;
 
             if (unseenNotification)
             {
@@ -79,8 +89,9 @@ namespace FailureNotificationsApp
                 Finish();
             }
 
-            socket = IO.Socket("https://projektzespolowyitm-production-7d0d.up.railway.app");
-            socket.On("newAwaria", (data) => {
+            socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app?token=" + MainActivity.authToken);
+           
+            socket.On("assignedAwaria", (data) => {
                 Console.WriteLine("poszlo");
                 if(MainActivity.isLoggedIn)
                 {
@@ -89,10 +100,11 @@ namespace FailureNotificationsApp
                     dynamic jsonobj = JObject.Parse(obj.ToString());
 
                     unseenNotification = true;
-                    notificationDescription = jsonobj.newAwaria.opis_awarii;
-                    notificationWorkstation = jsonobj.newAwaria.stanowisko.nazwa;
-                    notificationPriority = jsonobj.newAwaria.priorytet;
+                    notificationDescription = jsonobj.updated.opis_awarii;
+                    notificationWorkstation = jsonobj.updated.stanowisko.nazwa;
+                    notificationPriority = jsonobj.updated.priorytet;
                     OpenRaportView();
+                    Finish();
                 }
             });
 
@@ -110,6 +122,7 @@ namespace FailureNotificationsApp
             intent.PutExtra("notificationWorkstation", failures[e.Position].stanowisko.nazwa);
             intent.PutExtra("notificationPriority", new PriorityHelper(failures[e.Position].priorytet).getPriority());
             intent.PutExtra("notificationPriorityNumber", failures[e.Position].priorytet);
+            intent.PutExtra("failureId", failures[e.Position].id);
             StartActivity(intent);
             Toast.MakeText(Application.Context, failures[e.Position].opis_awarii, ToastLength.Short).Show();
         }

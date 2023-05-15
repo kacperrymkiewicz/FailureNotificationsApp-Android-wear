@@ -27,12 +27,11 @@ namespace FailureNotificationsApp
         public static readonly int NOTIFICATION_ID = 1000;
         public static readonly string CHANNEL_ID = "location_notification";
 
+        public static string baseApiUrl = "https://projektzespolowyitm-production.up.railway.app/api";
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            Intent backgroundService = new Intent(base.ApplicationContext, typeof(BackgroundTasks));
-            StartService(backgroundService);
 
             CreateNotificationChannel();
 

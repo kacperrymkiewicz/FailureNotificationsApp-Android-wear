@@ -40,14 +40,14 @@ namespace FailureNotificationsApp
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            socket = IO.Socket("https://projektzespolowyitm-production-7d0d.up.railway.app");
-            socket.On("newAwaria", (data) => {
+            socket = IO.Socket("https://projektzespolowyitm-production.up.railway.app?token=" + MainActivity.authToken);
+            socket.On("assignedAwaria", (data) => {
                 if(MainActivity.isLoggedIn)
                 {
                     var json = data[0] as JSONObject;
                     var obj = JsonConvert.DeserializeObject(json.ToString());
                     dynamic jsonobj = JObject.Parse(obj.ToString());
-                    string description = "Priorytet: " + new PriorityHelper((int)jsonobj.newAwaria.priorytet).getPriority();
+                    string description = "Priorytet: " + new PriorityHelper((int)jsonobj.updated.priorytet).getPriority();
 
                     Console.WriteLine(JsonConvert.DeserializeObject(json.ToString()));
 
@@ -58,8 +58,6 @@ namespace FailureNotificationsApp
 
                     var manager = NotificationManagerCompat.From(this);
                     manager.Notify(MainActivity.NOTIFICATION_ID, notification);
-
-                    //socket.Emit("add user", "Xamarin Android");
                 }
             });
 

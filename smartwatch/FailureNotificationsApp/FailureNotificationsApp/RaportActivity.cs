@@ -6,7 +6,6 @@ using Android.OS;
 using Android.Support.Wearable.Activity;
 using Android.Content;
 using Android.Media;
-using SocketIOClient;
 using System.Security.AccessControl;
 using Android.Graphics;
 using FailureNotificationsApp.helpers;
@@ -45,6 +44,8 @@ namespace FailureNotificationsApp
 
         private void Accept_button_Click(object sender, EventArgs e)
         {
+            var intent = new Intent(this, typeof(StatusService));
+            StartActivity(intent);
             Finish();
         }
     }

@@ -63,6 +63,7 @@ namespace FailureNotificationsApp
         {
             try
             {
+                login_button.Text = "Logowanie...";
                 string token = await GetAuthToken(login.Text.ToString(), password.Text.ToString());
                 MainActivity.authToken = token;
                 MainActivity.isLoggedIn = true;
@@ -72,6 +73,7 @@ namespace FailureNotificationsApp
             }
             catch(Exception ex) 
             {
+                login_button.Text = "Zaloguj";
                 Toast.MakeText(Application.Context, "Nieprawidłowy login lub hasło", ToastLength.Short).Show();
             }
         }

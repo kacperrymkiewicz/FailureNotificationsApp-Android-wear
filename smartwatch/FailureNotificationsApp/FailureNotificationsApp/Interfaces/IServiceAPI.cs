@@ -18,5 +18,8 @@ namespace FailureNotificationsApp.Interfaces
     {
         [Get("/awarie/pracownik/{employeeId}")]
         Task<List<Failure>> GetFailures(int employeeId);
+
+        [Patch("/awarie/{failureId}/ukoncz")]
+        Task FinishFailure(int failureId);
     }
 }
