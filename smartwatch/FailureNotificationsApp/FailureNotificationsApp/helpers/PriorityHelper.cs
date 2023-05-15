@@ -23,17 +23,17 @@ namespace FailureNotificationsApp.helpers
 
         public string getPriority()
         {
-            if (priority == 1) { return "niski"; }
+            if (priority == 1) { return "wysoki"; }
             if (priority == 2) { return "średni"; }
-            if (priority == 3) { return "wysoki"; }
+            if (priority == 3) { return "niski"; }
             return "";
         }
 
         public Color getPriorityColor()
         {
-            if (priority == 1) { return Color.Yellow; }
+            if (priority == 3) { return Color.Green; }
             if (priority == 2) { return Color.Orange; }
-            if (priority == 3) { return Color.Red; }
+            if (priority == 1) { return Color.Red; }
             return Color.Red;
         }
     }
