@@ -2,8 +2,9 @@
 ## An application designed for smartwatch devices running on Android Wear for maintenance and failure monitoring. The main functionality of the application is to send notifications about failures.
 
 ### Stack
-- Xamarin Android
-- Websocket
+- [Xamarin Android](https://learn.microsoft.com/pl-pl/xamarin/android/)
+- [Socket.IO](https://github.com/doghappy/socket.io-client-csharp)
+- [Refit](https://github.com/reactiveui/refit)
 
 ### GUI
 ![GUI IMG](https://cdn.discordapp.com/attachments/1100526159344697429/1108391869118951444/image.png?ex=65391dde&is=6526a8de&hm=caab4c107adf69fc8bb389550550c3ce7b675c07dfa18feaf1175229ed4347b4&)
